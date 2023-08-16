@@ -27,7 +27,6 @@ public class ContactService {
         Optional<Contact> existingContact = contactRepository.findByContactName(contactRequestBean.getContactName());
         if(existingContact.isEmpty()) {
             Contact contact = contactMapper.requestEntityMapperCreate(contactRequestBean);
-            contact = existingContact.get();
             contact.setStatus(ContactStatus.Active);
             contact = contactRepository.saveAndFlush(contact);
             return ResponseBean.builder().message("Contact is saved").status(Boolean.TRUE).data(contactMapper.entityResponseMapper(contact)).build();
